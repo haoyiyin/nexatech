@@ -1,0 +1,18 @@
+name = "nexatech-email-ingest"
+main = "email-ingest.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+MAIL_DOMAIN = "nexatech.edu.kg"
+SUPABASE_URL = "https://your-project.supabase.co"
+
+[triggers]
+crons = ["7 * * * *", "17 3 * * *"]
+
+[env.production]
+[env.production.vars]
+MAIL_DOMAIN = "nexatech.edu.kg"
+SUPABASE_URL = "https://your-project.supabase.co"
+
+[env.production.triggers]
+crons = ["7 * * * *", "17 3 * * *"]

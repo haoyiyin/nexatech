@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Directory | Nexatech University</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo-text-only-white-32x32.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="images/logo-text-only-white-128x128.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="images/logo-text-only-white-512x512.png">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Nexatech University" style="height: 100px;"></a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="campus.html">Campus</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="news.html">News & Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="javascript:void(0)" class="student-login">Student Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+    }
+</script>
+
+<script src="js/student-login.js" defer></script>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Faculty Directory</h1>
+            <p>Meet our distinguished faculty members who are dedicated to excellence in teaching and research</p>
+        </div>
+    </section>
+
+    <!-- Faculty Overview -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">Our Faculty</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Nexatech University boasts a diverse and accomplished faculty comprised of leading experts in their respective fields. Our faculty members are committed to providing students with a transformative educational experience through rigorous teaching, cutting-edge research, and mentorship.</p>
+                    <p>With a blend of academic excellence and real-world experience, our faculty prepares students to become leaders and innovators in their chosen professions.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/faculty-teaching.png" alt="Faculty Teaching" width="100%" height="auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Directory -->
+    <section class="faculty">
+        <div class="container">
+            <h2 class="section-title">Faculty Members</h2>
+            <div class="faculty-grid">
+                <div class="faculty-card">
+                    <img src="images/professor-smith.png" alt="Dr. John Smith">
+                    <h3>Dr. John Smith</h3>
+                    <p>Professor of Computer Science</p>
+                    <p>Specialization: Artificial Intelligence</p>
+                    <p>Ph.D. in Computer Science, Stanford University</p>
+                    <p>Dr. Smith's research focuses on machine learning algorithms, natural language processing, and AI ethics. He has published over 50 peer-reviewed papers and received multiple research grants from the National Science Foundation. Before joining Nexatech, he worked as a research scientist at Google AI.</p>
+                </div>
+                <div class="faculty-card">
+                    <img src="images/professor-johnson.png" alt="Dr. Sarah Johnson">
+                    <h3>Dr. Sarah Johnson</h3>
+                    <p>Professor of Business Administration</p>
+                    <p>Specialization: Marketing</p>
+                    <p>Ph.D. in Marketing, Harvard Business School</p>
+                    <p>Dr. Johnson's research examines consumer behavior, digital marketing strategies, and brand management. She has consulted for major corporations including Coca-Cola, Procter & Gamble, and Amazon. Dr. Johnson is also the author of two textbooks on marketing management.</p>
+                </div>
+                <div class="faculty-card">
+                    <img src="images/professor-chen.png" alt="Dr. Michael Chen">
+                    <h3>Dr. Michael Chen</h3>
+                    <p>Professor of Electrical Engineering</p>
+                    <p>Specialization: Renewable Energy</p>
+                    <p>Ph.D. in Electrical Engineering, Massachusetts Institute of Technology</p>
+                    <p>Dr. Chen's research focuses on solar energy systems, energy storage technologies, and smart grid applications. He holds 15 patents in renewable energy technologies and has led several large-scale research projects funded by the Department of Energy. Dr. Chen is also a Fellow of the Institute of Electrical and Electronics Engineers (IEEE).</p>
+                </div>
+                <div class="faculty-card">
+                    <img src="images/professor-rodriguez.png" alt="Dr. Emily Rodriguez">
+                    <h3>Dr. Emily Rodriguez</h3>
+                    <p>Professor of Public Health</p>
+                    <p>Specialization: Epidemiology</p>
+                    <p>Ph.D. in Epidemiology, Johns Hopkins University</p>
+                    <p>Dr. Rodriguez's research focuses on infectious disease epidemiology, global health, and health disparities. She has worked on public health initiatives in over 20 countries and has published extensively on HIV/AIDS prevention and treatment strategies. Dr. Rodriguez is a recipient of the Presidential Early Career Award for Scientists and Engineers.</p>
+                </div>
+                <div class="faculty-card">
+                    <img src="images/professor-kim.png" alt="Dr. David Kim">
+                    <h3>Dr. David Kim</h3>
+                    <p>Professor of Economics</p>
+                    <p>Specialization: International Economics</p>
+                    <p>Ph.D. in Economics, University of Chicago</p>
+                    <p>Dr. Kim's research examines international trade policies, global financial markets, and economic development. He has served as a consultant to the International Monetary Fund and the World Bank. Dr. Kim is the author of "Global Economic Integration: Challenges and Opportunities" and has received numerous awards for his research contributions.</p>
+                </div>
+                <div class="faculty-card">
+                    <img src="images/professor-wang.png" alt="Dr. Lisa Wang">
+                    <h3>Dr. Lisa Wang</h3>
+                    <p>Professor of Psychology</p>
+                    <p>Specialization: Clinical Psychology</p>
+                    <p>Ph.D. in Clinical Psychology, University of California, Berkeley</p>
+                    <p>Dr. Wang's research focuses on anxiety disorders, trauma, and evidence-based therapeutic interventions. She maintains a part-time clinical practice and has developed innovative treatment protocols for post-traumatic stress disorder. Dr. Wang is a Fellow of the American Psychological Association and has received funding for her research from the National Institute of Mental Health.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <img src="images/logo.png" alt="Nexatech University" style="height: 100px; margin-bottom: 10px;">
+                    <p>www.nexatech.edu.kg</p>
+                    <p>Providing quality education for a brighter future</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="campus.html">Campus</a></li>
+                        <li><a href="faculty.html">Faculty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Library</a></li>
+                        <li><a href="#">Student Services</a></li>
+                        <li><a href="#">Academic Calendar</a></li>
+                        <li><a href="#">Financial Aid</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@nexatech.edu.kg</li>
+                        <li>Phone: +996 312 555 7392</li>
+                        <li>Address: 76 Prospect Mira, Bishkek 720000, Kyrgyzstan</li>
+                        <li>Office Hours: Monday - Friday, 8:30 AM - 5:30 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span class="current-year"></span> Nexatech University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

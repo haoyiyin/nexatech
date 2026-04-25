@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/mail/index.html" },
+    { "source": "/index.html", "destination": "/mail/index.html" },
+    { "source": "/programs.html", "destination": "/mail/programs.html" },
+    { "source": "/admissions.html", "destination": "/mail/admissions.html" },
+    { "source": "/campus.html", "destination": "/mail/campus.html" },
+    { "source": "/faculty.html", "destination": "/mail/faculty.html" },
+    { "source": "/news.html", "destination": "/mail/news.html" },
+    { "source": "/contact.html", "destination": "/mail/contact.html" },
+    { "source": "/css/:path*", "destination": "/mail/css/:path*" },
+    { "source": "/js/:path*", "destination": "/mail/js/:path*" },
+    { "source": "/images/:path*", "destination": "/mail/images/:path*" }
+  ]
+}

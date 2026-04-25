@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Facilities | Nexatech University</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo-text-only-white-32x32.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="images/logo-text-only-white-128x128.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="images/logo-text-only-white-512x512.png">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Nexatech University" style="height: 100px;"></a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="campus.html">Campus</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="news.html">News & Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="javascript:void(0)" class="student-login">Student Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+    }
+</script>
+
+<script src="js/student-login.js" defer></script>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Campus Facilities</h1>
+            <p>Explore our state-of-the-art facilities designed to support academic excellence and student life</p>
+        </div>
+    </section>
+
+    <!-- Campus Overview -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">Our Campus</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Nexatech University's campus spans over 50 acres in the heart of Bishkek, featuring modern academic buildings, research facilities, student residences, and recreational spaces. Our campus is designed to create a vibrant and supportive environment that fosters academic excellence, research innovation, and student life.</p>
+                    <p>With beautifully landscaped grounds, state-of-the-art facilities, and a commitment to sustainability, our campus provides an inspiring setting for learning, collaboration, and personal growth.</p>
+                </div>
+                <div class="about-image">
+                    <img src="images/campus-overview.png" alt="Nexatech University Campus" width="100%" height="auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities -->
+    <section class="campus">
+        <div class="container">
+            <h2 class="section-title">Campus Facilities</h2>
+            <div class="campus-grid">
+                <div class="campus-card">
+                    <img src="images/library.png" alt="Library">
+                    <div class="card-content">
+                        <h3>University Library</h3>
+                        <p>Our 50,000-square-foot library houses over 250,000 print volumes, 500,000 e-books, and 100+ online databases. The facility features quiet study zones, collaborative workspaces, computer labs, and private study rooms. Professional librarians provide research assistance and information literacy training to support student and faculty research needs.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="images/classroom.png" alt="Classrooms">
+                    <div class="card-content">
+                        <h3>Smart Classrooms</h3>
+                        <p>Our 75+ smart classrooms are equipped with the latest educational technology, including interactive whiteboards, video conferencing capabilities, and multimedia presentation systems. Classrooms range from intimate seminar rooms for 15 students to large lecture halls that accommodate 200+ students, all designed to enhance the learning experience.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="images/laboratory.png" alt="Laboratories">
+                    <div class="card-content">
+                        <h3>Research Laboratories</h3>
+                        <p>Our specialized research laboratories include advanced facilities for engineering, computer science, biology, chemistry, and environmental science. These state-of-the-art labs are equipped with cutting-edge equipment and technology, providing students and faculty with the resources needed for groundbreaking research projects.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="images/sports-center.png" alt="Sports Center">
+                    <div class="card-content">
+                        <h3>Sports and Recreation Center</h3>
+                        <p>Our 80,000-square-foot sports center features a gymnasium, fitness center with state-of-the-art equipment, indoor track, swimming pool, and courts for basketball, volleyball, and tennis. The facility also includes locker rooms, saunas, and group exercise studios offering yoga, Pilates, and aerobics classes.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="images/student-center.png" alt="Student Center">
+                    <div class="card-content">
+                        <h3>Student Center</h3>
+                        <p>The Student Center serves as the hub of campus life, featuring a cafeteria with diverse dining options, meeting rooms for student organizations, lounges for socializing, and spaces for events and activities. It also houses the student government offices, career services center, and student support services.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="images/auditorium.png" alt="Auditorium">
+                    <div class="card-content">
+                        <h3>University Auditorium</h3>
+                        <p>Our 1,200-seat auditorium is a versatile venue for lectures, conferences, cultural events, and performances. Equipped with professional sound and lighting systems, it hosts guest speakers, academic conferences, theatrical productions, and musical performances throughout the year.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="images/residence-halls.png" alt="Residence Halls">
+                    <div class="card-content">
+                        <h3>Residence Halls</h3>
+                        <p>Our on-campus residence halls provide comfortable living spaces for over 1,500 students. Options include traditional dormitories and apartment-style housing, all equipped with wireless internet, laundry facilities, and common areas for study and socializing. Resident advisors provide support and organize community events.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="images/research-center.png" alt="Research Center">
+                    <div class="card-content">
+                        <h3>Research and Innovation Center</h3>
+                        <p>Our state-of-the-art Research and Innovation Center houses interdisciplinary research teams working on cutting-edge projects in renewable energy, artificial intelligence, public health, and sustainable development. The facility includes collaborative workspaces, prototyping labs, and meeting rooms for industry partnerships.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <img src="images/logo.png" alt="Nexatech University" style="height: 100px; margin-bottom: 10px;">
+                    <p>www.nexatech.edu.kg</p>
+                    <p>Providing quality education for a brighter future</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="campus.html">Campus</a></li>
+                        <li><a href="faculty.html">Faculty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Library</a></li>
+                        <li><a href="#">Student Services</a></li>
+                        <li><a href="#">Academic Calendar</a></li>
+                        <li><a href="#">Financial Aid</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@nexatech.edu.kg</li>
+                        <li>Phone: +996 312 555 7392</li>
+                        <li>Address: 76 Prospect Mira, Bishkek 720000, Kyrgyzstan</li>
+                        <li>Office Hours: Monday - Friday, 8:30 AM - 5:30 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span class="current-year"></span> Nexatech University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

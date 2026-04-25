@@ -1,0 +1,16 @@
+.DS_Store
+backup/
+**/node_modules/
+**/.next/
+**/dist/
+**/build/
+**/*.tsbuildinfo
+**/.env
+**/.env.*
+!**/.env.example
+**/.vercel/
+**/.wrangler/
+mail-app/artifacts/
+mail-app/test-results/
+mail-app/playwright-results.json
+mail-app/supabase/.temp/

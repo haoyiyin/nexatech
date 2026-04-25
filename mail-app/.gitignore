@@ -1,0 +1,20 @@
+.next
+node_modules
+.env.local
+.env
+next-env.d.ts
+*.tsbuildinfo
+.vercel
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
+
+# load test fixtures
+load-tests/fixtures/users.csv
+load-tests/fixtures/message-map.json

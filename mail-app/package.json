@@ -1,0 +1,48 @@
+{
+  "name": "nexatech-mailbox",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "create-student": "npx tsx scripts/create-student-account.ts",
+    "import-csv": "npx tsx scripts/import-students-csv.ts",
+    "migrate-mail-domain": "npx tsx scripts/migrate-mail-domain.ts",
+    "export-load-test-fixtures": "npx tsx scripts/export-load-test-fixtures.ts",
+    "send-load-test-mails": "npx tsx scripts/send-load-test-mails.ts",
+    "load:web:health": "k6 run load-tests/web/health.js",
+    "load:web:login": "k6 run load-tests/web/login.js",
+    "load:web:inbox": "k6 run load-tests/web/inbox.js",
+    "load:web:message-detail": "k6 run load-tests/web/message-detail.js",
+    "load:web:admin-dashboard": "k6 run load-tests/web/admin-dashboard.js",
+    "load:web:prod-mixed": "k6 run load-tests/web/prod-mixed.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.6.0",
+    "@supabase/supabase-js": "^2.49.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.474.0",
+    "next": "^15.3.0",
+    "nodemailer": "^8.0.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "jsdom": "^29.0.2",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.2.4"
+  }
+}

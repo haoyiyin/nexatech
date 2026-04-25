@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Programs | Nexatech University</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/logo-text-only-white-32x32.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="images/logo-text-only-white-128x128.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="images/logo-text-only-white-512x512.png">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Nexatech University" style="height: 100px;"></a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="admissions.html">Admissions</a></li>
+                    <li><a href="campus.html">Campus</a></li>
+                    <li><a href="faculty.html">Faculty</a></li>
+                    <li><a href="news.html">News & Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="javascript:void(0)" class="student-login">Student Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    
+    if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+    }
+</script>
+
+<script src="js/student-login.js" defer></script>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Academic Programs</h1>
+            <p>Explore our diverse range of undergraduate and graduate programs designed to prepare you for success</p>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="programs">
+        <div class="container">
+            <h2 class="section-title">Undergraduate Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3>Faculty of Engineering</h3>
+                    <p>Our Engineering programs combine rigorous theoretical education with hands-on practical experience to prepare students for successful careers in the ever-evolving field of engineering.</p>
+                    <h4>Available Programs:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Bachelor of Science in Computer Science</li>
+                        <li>Bachelor of Science in Electrical Engineering</li>
+                        <li>Bachelor of Science in Mechanical Engineering</li>
+                        <li>Bachelor of Science in Civil Engineering</li>
+                    </ul>
+                    <p>Our engineering graduates have gone on to work at leading technology companies, research institutions, and government agencies worldwide.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Faculty of Business</h3>
+                    <p>Our Business programs provide students with a comprehensive understanding of business principles, leadership skills, and strategic thinking to succeed in today's competitive global marketplace.</p>
+                    <h4>Available Programs:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Bachelor of Business Administration</li>
+                        <li>Bachelor of Science in Finance</li>
+                        <li>Bachelor of Science in Marketing</li>
+                        <li>Bachelor of Science in Entrepreneurship</li>
+                    </ul>
+                    <p>Our business graduates are highly sought after by top corporations, financial institutions, and consulting firms.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Faculty of Arts & Sciences</h3>
+                    <p>Our Arts & Sciences programs foster critical thinking, creativity, and a broad understanding of the world, preparing students for diverse career paths and lifelong learning.</p>
+                    <h4>Available Programs:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Bachelor of Arts in Economics</li>
+                        <li>Bachelor of Arts in Psychology</li>
+                        <li>Bachelor of Arts in Sociology</li>
+                        <li>Bachelor of Science in Environmental Science</li>
+                    </ul>
+                    <p>Our arts and sciences graduates pursue careers in education, research, government, non-profit organizations, and various industries.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Faculty of Health Sciences</h3>
+                    <p>Our Health Sciences programs prepare students for rewarding careers in the healthcare sector, with a focus on patient care, public health, and healthcare management.</p>
+                    <h4>Available Programs:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Bachelor of Science in Nursing</li>
+                        <li>Bachelor of Science in Public Health</li>
+                        <li>Bachelor of Science in Healthcare Administration</li>
+                    </ul>
+                    <p>Our health sciences graduates work in hospitals, clinics, public health agencies, and healthcare organizations around the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">Graduate Programs</h2>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3>Master of Business Administration (MBA)</h3>
+                    <p>A rigorous program designed for professionals seeking to advance their careers in business leadership and management. The program focuses on strategic thinking, decision-making, and ethical leadership.</p>
+                    <h4>Specializations:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Finance</li>
+                        <li>Marketing</li>
+                        <li>Operations Management</li>
+                        <li>Entrepreneurship</li>
+                    </ul>
+                </div>
+                <div class="program-card">
+                    <h3>Master of Science in Computer Science</h3>
+                    <p>An advanced program focusing on cutting-edge technologies and research in computer science. Students gain expertise in artificial intelligence, data science, software engineering, and cybersecurity.</p>
+                    <h4>Specializations:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Artificial Intelligence</li>
+                        <li>Data Science</li>
+                        <li>Cybersecurity</li>
+                        <li>Software Engineering</li>
+                    </ul>
+                </div>
+                <div class="program-card">
+                    <h3>Master of Public Health (MPH)</h3>
+                    <p>A comprehensive program focused on public health policy, epidemiology, and healthcare management. Students learn to address global health challenges and improve population health outcomes.</p>
+                    <h4>Specializations:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>Epidemiology</li>
+                        <li>Health Policy and Management</li>
+                        <li>Environmental Health</li>
+                        <li>Global Health</li>
+                    </ul>
+                </div>
+                <div class="program-card">
+                    <h3>Doctor of Philosophy (PhD) Programs</h3>
+                    <p>Research-intensive programs designed for students seeking careers in academia, research, or leadership positions in their respective fields.</p>
+                    <h4>Available Programs:</h4>
+                    <ul style="list-style-type: disc; margin-left: 20px; margin-top: 10px;">
+                        <li>PhD in Engineering</li>
+                        <li>PhD in Business Administration</li>
+                        <li>PhD in Public Health</li>
+                        <li>PhD in Computer Science</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <img src="images/logo.png" alt="Nexatech University" style="height: 100px; margin-bottom: 10px;">
+                    <p>www.nexatech.edu.kg</p>
+                    <p>Providing quality education for a brighter future</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="programs.html">Programs</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="campus.html">Campus</a></li>
+                        <li><a href="faculty.html">Faculty</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Library</a></li>
+                        <li><a href="#">Student Services</a></li>
+                        <li><a href="#">Academic Calendar</a></li>
+                        <li><a href="#">Financial Aid</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@nexatech.edu.kg</li>
+                        <li>Phone: +996 312 555 7392</li>
+                        <li>Address: 76 Prospect Mira, Bishkek 720000, Kyrgyzstan</li>
+                        <li>Office Hours: Monday - Friday, 8:30 AM - 5:30 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span class="current-year"></span> Nexatech University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
