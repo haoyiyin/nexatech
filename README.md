@@ -11,6 +11,10 @@ Nexatech Mail Platform is a school-oriented mailbox system that combines:
 
 Students sign in from the public website via a login modal and are redirected into the `/mail` application to read messages and change passwords. Administrators can provision and manage mailbox accounts from the admin area.
 
+## Demo
+
+Live demo: [https://www.nexatech.edu.kg/](https://www.nexatech.edu.kg/)
+
 ## Repository layout
 
 This repository has two main parts:
