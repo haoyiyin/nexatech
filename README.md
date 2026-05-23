@@ -1,5 +1,7 @@
 # Nexatech Mail Platform
 
+> **⚠️ Disclaimer:** This project is for educational and demonstration purposes only.
+
 [中文说明 / 中文 README](./README.zh-CN.md)
 
 Nexatech Mail Platform is a school-oriented mailbox system that combines:

@@ -1,5 +1,7 @@
 # Nexatech 邮箱平台
 
+> **⚠️ 声明：** 本项目仅用作教学演示。
+
 [English README](./README.md)
 
 Nexatech 邮箱平台是一个面向学校场景的邮箱系统，包含：
