@@ -1,6 +1,6 @@
 /**
  * Student Login Modal
- * Shows a modal on the static site that redirects to the mailbox app.
+ * Shows a modal on the static site that authenticates directly against the mail app.
  * Lightweight integration - no framework dependencies.
  */
 (function () {
@@ -116,7 +116,8 @@
         }
 
         submitButton.textContent = 'Opening mailbox...';
-        window.location.href = MAILBOX_URL;
+        var redirectParam = new URLSearchParams(window.location.search).get('redirect');
+        window.location.href = MAILBOX_URL + (redirectParam || '');
       } catch (_) {
         showError(errorEl, 'Unable to sign in right now. Please try again.');
         passwordInput.value = '';

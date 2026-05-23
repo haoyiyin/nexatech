@@ -4,7 +4,7 @@
  * Lightweight integration - no framework dependencies.
  */
 (function () {
-  var MAILBOX_URL = 'https://www.nexatech.edu.kg/mail';
+  var MAILBOX_URL = '/mail';
 
   function init() {
     var triggers = document.querySelectorAll('.student-login');
@@ -116,7 +116,8 @@
         }
 
         submitButton.textContent = 'Opening mailbox...';
-        window.location.href = MAILBOX_URL;
+        var redirectParam = new URLSearchParams(window.location.search).get('redirect');
+        window.location.href = MAILBOX_URL + (redirectParam || '');
       } catch (_) {
         showError(errorEl, 'Unable to sign in right now. Please try again.');
         passwordInput.value = '';

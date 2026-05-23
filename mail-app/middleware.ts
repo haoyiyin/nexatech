@@ -4,13 +4,23 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const canonicalHost = "www.nexatech.edu.kg";
+  const host = request.headers.get("host") || "";
+  const isLocal =
+    host.startsWith("localhost:") ||
+    host.startsWith("127.0.0.1:") ||
+    host === "localhost" ||
+    host === "127.0.0.1";
 
-  if (request.headers.get("host") !== canonicalHost) {
+  if (!isLocal && host !== canonicalHost) {
     const canonicalUrl = request.nextUrl.clone();
     canonicalUrl.protocol = "https:";
     canonicalUrl.host = canonicalHost;
     return NextResponse.redirect(canonicalUrl);
   }
+
+  const origin = isLocal
+    ? `${request.nextUrl.protocol}//${host}`
+    : `https://${canonicalHost}`;
 
   let supabaseResponse = NextResponse.next({
     request,
@@ -44,7 +54,7 @@ export async function middleware(request: NextRequest) {
 
   if (isStudentProtectedRoute && !user) {
     const returnTo = pathname.startsWith("/mail/") ? pathname.replace(/^\/mail/, "") : pathname;
-    const websiteUrl = new URL("https://www.nexatech.edu.kg");
+    const websiteUrl = new URL(origin);
     websiteUrl.searchParams.set("mail_login", "1");
     websiteUrl.searchParams.set("redirect", returnTo);
     return NextResponse.redirect(websiteUrl);
@@ -67,7 +77,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    return NextResponse.redirect(new URL("https://www.nexatech.edu.kg?mail_login=1", request.url));
+    return NextResponse.redirect(new URL(`${origin}?mail_login=1`));
   }
 
   if (isAdminLoginRoute) {
