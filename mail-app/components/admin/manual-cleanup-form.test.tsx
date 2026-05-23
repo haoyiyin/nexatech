@@ -68,6 +68,7 @@ describe("ManualCleanupForm", () => {
           deleted_events_count: 1,
           deleted_failures_count: 0,
           deleted_job_runs_count: 0,
+          deleted_rate_limits_count: 0,
         },
       }),
     });

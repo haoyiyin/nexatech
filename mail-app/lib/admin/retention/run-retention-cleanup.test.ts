@@ -71,7 +71,11 @@ describe("runRetentionCleanup", () => {
         };
       }
 
-      if (table === "mail_ingestion_failures" || table === "mail_messages") {
+      if (
+        table === "mail_ingestion_failures" ||
+        table === "mail_messages" ||
+        table === "login_rate_limits"
+      ) {
         return {
           delete: () => ({ lt: deleteLtMock }),
         };
@@ -88,7 +92,8 @@ describe("runRetentionCleanup", () => {
       .mockResolvedValueOnce({ data: [{ id: "m1" }, { id: "m2" }], error: null })
       .mockResolvedValueOnce({ data: [{ id: "e1" }], error: null })
       .mockResolvedValueOnce({ data: [{ id: "f1" }], error: null })
-      .mockResolvedValueOnce({ data: [{ id: "j1" }], error: null });
+      .mockResolvedValueOnce({ data: [{ id: "j1" }], error: null })
+      .mockResolvedValueOnce({ data: [{ key: "r1" }], error: null });
 
     const result = await runRetentionCleanup({ retentionDays: 45 });
 
@@ -97,6 +102,7 @@ describe("runRetentionCleanup", () => {
       deleted_events_count: 1,
       deleted_failures_count: 1,
       deleted_job_runs_count: 1,
+      deleted_rate_limits_count: 1,
     });
   });
 
@@ -108,6 +114,7 @@ describe("runRetentionCleanup", () => {
       deleted_events_count: 0,
       deleted_failures_count: 0,
       deleted_job_runs_count: 0,
+      deleted_rate_limits_count: 0,
     });
   });
 
@@ -125,13 +132,15 @@ describe("runRetentionCleanup", () => {
       .mockResolvedValueOnce({
         data: null,
         error: { code: "PGRST205", message: "missing job runs table" },
-      });
+      })
+      .mockResolvedValueOnce({ data: [], error: null });
 
     await expect(runRetentionCleanup({ retentionDays: 30 })).resolves.toEqual({
       deleted_messages_count: 1,
       deleted_events_count: 0,
       deleted_failures_count: 0,
       deleted_job_runs_count: 0,
+      deleted_rate_limits_count: 0,
     });
   });
 });

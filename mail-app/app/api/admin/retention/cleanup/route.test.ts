@@ -77,6 +77,7 @@ describe("POST /api/admin/retention/cleanup", () => {
       deleted_events_count: 1,
       deleted_failures_count: 1,
       deleted_job_runs_count: 0,
+      deleted_rate_limits_count: 0,
     });
 
     const response = await POST(createCleanupRequest({ retentionDays: 45 }));
@@ -89,6 +90,7 @@ describe("POST /api/admin/retention/cleanup", () => {
         deleted_events_count: 1,
         deleted_failures_count: 1,
         deleted_job_runs_count: 0,
+        deleted_rate_limits_count: 0,
       },
     });
     expect(runRetentionCleanupMock).toHaveBeenCalledWith({ retentionDays: 45 });
@@ -179,6 +181,7 @@ describe("POST /api/admin/retention/cleanup", () => {
       deleted_events_count: 0,
       deleted_failures_count: 0,
       deleted_job_runs_count: 0,
+      deleted_rate_limits_count: 0,
     });
 
     const response = await POST(createCleanupRequest({ retentionDays: 45 }));

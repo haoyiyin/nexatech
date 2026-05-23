@@ -1,7 +1,7 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { SYSTEM_WELCOME_SENDER } from "@/lib/mail/get-sender-display-name";
 
-const MAIL_DOMAIN = "nexatech.edu.kg";
+const MAIL_DOMAIN = (process.env.MAIL_DOMAIN || "nexatech.edu.kg").trim().toLowerCase();
 const WELCOME_SUBJECT = "Welcome to Nexatech University";
 const WELCOME_TEXT_BODY = `Welcome to Nexatech University.\n\nWe are delighted to welcome you as a new student. Your official school mailbox is now ready to use.\n\nYou can sign in with your username and password to receive school announcements, academic notices, and important campus updates.\n\nWe wish you a successful and inspiring journey at Nexatech University.`;
 

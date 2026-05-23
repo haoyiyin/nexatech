@@ -11,6 +11,7 @@ export interface RetentionCleanupSummary {
   deleted_events_count: number;
   deleted_failures_count: number;
   deleted_job_runs_count: number;
+  deleted_rate_limits_count: number;
 }
 
 interface JobRunRecord {
@@ -64,6 +65,7 @@ export async function runRetentionCleanup({
         deleted_events_count: 0,
         deleted_failures_count: 0,
         deleted_job_runs_count: 0,
+        deleted_rate_limits_count: 0,
       },
       startedAt,
       normalizeErrorMessage(error)
@@ -111,11 +113,14 @@ async function cleanupRetainedMessages(
     true
   );
 
+  const deletedRateLimitsCount = await deleteExpiredRateLimits(supabase);
+
   return {
     deleted_messages_count: deletedMessagesCount,
     deleted_events_count: deletedEventsCount,
     deleted_failures_count: deletedFailuresCount,
     deleted_job_runs_count: deletedJobRunsCount,
+    deleted_rate_limits_count: deletedRateLimitsCount,
   };
 }
 
@@ -233,6 +238,39 @@ async function safeRecordEvent(
   } catch {
     // Fail open so cleanup is not blocked by event persistence issues.
   }
+}
+
+async function deleteExpiredRateLimits(
+  supabase: ReturnType<typeof createAdminClient>
+): Promise<number> {
+  const now = new Date().toISOString();
+  let deletedCount = 0;
+
+  for (let batchIndex = 0; batchIndex < MAX_RETENTION_DELETE_BATCHES_PER_TABLE; batchIndex += 1) {
+    const { data: deletedRows, error } = await supabase
+      .from("login_rate_limits")
+      .delete()
+      .lt("reset_at", now)
+      .select("key")
+      .limit(RETENTION_DELETE_BATCH_SIZE);
+
+    if (error) {
+      if (isMissingTableError(error)) {
+        return 0;
+      }
+
+      throw new Error(`Retention cleanup failed for login_rate_limits: ${(error as Error).message}`);
+    }
+
+    const rows = deletedRows ?? [];
+    deletedCount += rows.length;
+
+    if (rows.length < RETENTION_DELETE_BATCH_SIZE) {
+      break;
+    }
+  }
+
+  return deletedCount;
 }
 
 function isMissingTableError(error: unknown): error is { code: string } {

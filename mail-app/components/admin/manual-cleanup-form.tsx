@@ -11,6 +11,7 @@ interface CleanupSummary {
   deleted_events_count: number;
   deleted_failures_count: number;
   deleted_job_runs_count: number;
+  deleted_rate_limits_count: number;
 }
 
 export default function ManualCleanupForm() {
