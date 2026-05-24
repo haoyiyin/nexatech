@@ -15,7 +15,7 @@ Students sign in from the public website via a login modal and are redirected in
 
 ## Demo
 
-Live demo: [https://www.nexatech.edu.kg/](https://www.nexatech.edu.kg/)
+Live demo: [nexatech.edu.kg](https://www.nexatech.edu.kg)
 
 ## Repository layout
 
