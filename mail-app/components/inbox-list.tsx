@@ -84,12 +84,12 @@ export default function InboxList({
         ))}
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <Link
           href={hasPreviousPage ? `/inbox?page=${currentPage - 1}` : "/inbox"}
           aria-disabled={!hasPreviousPage}
           className={cn(
-            "inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium transition-colors",
+            "inline-flex items-center rounded-md border px-3 sm:px-4 py-2 text-sm font-medium transition-colors",
             hasPreviousPage
               ? "border-[#cbd5e1] bg-white text-[#1a365d] hover:bg-[#f8fafc]"
               : "pointer-events-none border-[#e2e8f0] bg-[#f8fafc] text-[#94a3b8]"
@@ -102,7 +102,7 @@ export default function InboxList({
           href={hasNextPage ? `/inbox?page=${currentPage + 1}` : `/inbox?page=${currentPage}`}
           aria-disabled={!hasNextPage}
           className={cn(
-            "inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium transition-colors",
+            "inline-flex items-center rounded-md border px-3 sm:px-4 py-2 text-sm font-medium transition-colors",
             hasNextPage
               ? "border-[#cbd5e1] bg-white text-[#1a365d] hover:bg-[#f8fafc]"
               : "pointer-events-none border-[#e2e8f0] bg-[#f8fafc] text-[#94a3b8]"

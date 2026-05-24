@@ -29,7 +29,7 @@ export default function AccountsTable({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <form action="/mail/admin/mailboxes" className="flex w-full max-w-md gap-2">
           <Input name="q" defaultValue={query} placeholder="Search by email or student ID" />
           <Button type="submit" variant="outline">
@@ -46,25 +46,30 @@ export default function AccountsTable({
           No mailbox accounts found.
         </div>
       ) : (
-        <div className="overflow-hidden rounded-lg border border-[#e2e8f0] bg-white">
+        <div className="overflow-x-auto rounded-lg border border-[#e2e8f0] bg-white">
           <table className="min-w-full divide-y divide-[#e2e8f0] text-sm">
             <thead className="bg-[#f8fafc] text-left text-[#475569]">
               <tr>
                 <th className="px-4 py-3 font-medium">Email</th>
-                <th className="px-4 py-3 font-medium">Student ID</th>
-                <th className="px-4 py-3 font-medium">Role</th>
-                <th className="px-4 py-3 font-medium">Status</th>
-                <th className="px-4 py-3 font-medium">Created</th>
+                <th className="px-4 py-3 font-medium hidden sm:table-cell">Student ID</th>
+                <th className="px-4 py-3 font-medium hidden md:table-cell">Role</th>
+                <th className="px-4 py-3 font-medium hidden sm:table-cell">Status</th>
+                <th className="px-4 py-3 font-medium hidden md:table-cell">Created</th>
                 <th className="px-4 py-3 font-medium">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#e2e8f0]">
               {mailboxes.map((mailbox) => (
                 <tr key={mailbox.id}>
-                  <td className="px-4 py-3 text-[#1e293b]">{mailbox.emailAddress}</td>
-                  <td className="px-4 py-3 text-[#475569]">{mailbox.studentIdentifier ?? "—"}</td>
-                  <td className="px-4 py-3 capitalize text-[#475569]">{mailbox.role}</td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 text-[#1e293b]">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-medium">{mailbox.emailAddress}</span>
+                      <span className="text-xs text-[#64748b] sm:hidden">{mailbox.studentIdentifier ?? "—"}</span>
+                    </div>
+                  </td>
+                  <td className="px-4 py-3 text-[#475569] hidden sm:table-cell">{mailbox.studentIdentifier ?? "—"}</td>
+                  <td className="px-4 py-3 capitalize text-[#475569] hidden md:table-cell">{mailbox.role}</td>
+                  <td className="px-4 py-3 hidden sm:table-cell">
                     <span
                       className={cn(
                         "inline-flex rounded-full px-2.5 py-1 text-xs font-medium capitalize",
@@ -76,7 +81,7 @@ export default function AccountsTable({
                       {mailbox.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-[#475569]">
+                  <td className="px-4 py-3 text-[#475569] hidden md:table-cell">
                     {new Date(mailbox.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-3">

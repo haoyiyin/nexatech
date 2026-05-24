@@ -72,11 +72,11 @@ export default function MessageView({ message, page }: MessageViewProps) {
   const backHref = page && page > 1 ? `/inbox?page=${page}` : "/inbox";
 
   return (
-    <div className="p-6">
-      <div className="mb-6">
+    <div className="p-4 sm:p-6">
+      <div className="mb-4 sm:mb-6">
         <Link
           href={backHref}
-          className="inline-flex items-center rounded-md px-4 py-2 text-sm font-medium text-[#1a365d] transition-colors hover:bg-[#f1f5f9]"
+          className="inline-flex items-center rounded-md px-3 sm:px-4 py-2 text-sm font-medium text-[#1a365d] transition-colors hover:bg-[#f1f5f9]"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Inbox
@@ -85,36 +85,36 @@ export default function MessageView({ message, page }: MessageViewProps) {
 
       <div className="bg-white rounded-lg border border-[#e2e8f0]">
         {markReadError ? (
-          <div className="border-b border-[#e2e8f0] bg-amber-50 px-6 py-3 text-sm text-amber-800">
+          <div className="border-b border-[#e2e8f0] bg-amber-50 px-4 sm:px-6 py-3 text-sm text-amber-800">
             We could not update this message as read. Please refresh and try again.
           </div>
         ) : null}
 
-        <div className="p-6 border-b border-[#e2e8f0]">
-          <h2 className="text-xl font-semibold text-[#1a365d] mb-4">
+        <div className="p-4 sm:p-6 border-b border-[#e2e8f0]">
+          <h2 className="text-lg sm:text-xl font-semibold text-[#1a365d] mb-4 break-words">
             {message.subject || "(No subject)"}
           </h2>
 
           <div className="flex flex-col gap-2 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="font-medium text-[#64748b] w-16">From:</span>
-              <span className="text-[#334155]">{getSenderDisplayName(message.from_address)}</span>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span className="font-medium text-[#64748b] sm:w-16 shrink-0">From:</span>
+              <span className="text-[#334155] break-all">{getSenderDisplayName(message.from_address)}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium text-[#64748b] w-16">To:</span>
-              <span className="text-[#334155]">{message.to_address}</span>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span className="font-medium text-[#64748b] sm:w-16 shrink-0">To:</span>
+              <span className="text-[#334155] break-all">{message.to_address}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="font-medium text-[#64748b] w-16">Date:</span>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+              <span className="font-medium text-[#64748b] sm:w-16 shrink-0">Date:</span>
               <span className="text-[#334155] flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
+                <Calendar className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                 {formattedReceivedAt}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="p-6 whitespace-pre-wrap text-[#334155] leading-relaxed text-sm">
+        <div className="p-4 sm:p-6 whitespace-pre-wrap break-words text-[#334155] leading-relaxed text-sm overflow-x-auto">
           {body}
         </div>
       </div>
