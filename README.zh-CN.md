@@ -15,7 +15,7 @@ Nexatech 邮箱平台是一个面向学校场景的邮箱系统，包含：
 
 ## Demo 演示
 
-在线演示地址：[https://www.nexatech.edu.kg/](https://www.nexatech.edu.kg/)
+在线演示地址：[nexatech.edu.kg](https://www.nexatech.edu.kg)
 
 ## 仓库结构
 
