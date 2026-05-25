@@ -33,6 +33,54 @@ Nexatech 邮箱平台是一个面向学校场景的邮箱系统，包含：
    - 基于 Supabase 的认证与数据存储
    - Cloudflare 邮件 Worker 与运维脚本
 
+### 项目结构
+
+```
+mail-app/
+├── app/                          # Next.js App Router 页面
+│   ├── layout.tsx
+│   ├── login/page.tsx            # 登录页
+│   ├── inbox/page.tsx            # 收件箱列表
+│   ├── inbox/[messageId]/page.tsx # 邮件详情
+│   └── settings/password/page.tsx # 修改密码
+├── components/
+│   ├── ui/                       # UI 基础组件
+│   ├── mail-layout.tsx           # 认证页面侧边栏
+│   ├── inbox-list.tsx            # 收件箱列表组件
+│   └── message-view.tsx          # 邮件详情组件
+├── lib/
+│   ├── supabase/client.ts        # 浏览器端 Supabase 客户端
+│   ├── supabase/server.ts        # 服务端 Supabase 客户端
+│   ├── auth/require-session.ts   # 鉴权守卫
+│   ├── mail/sanitize-message.ts  # 邮件 HTML 消毒
+│   └── utils.ts                  # 样式合并工具
+├── scripts/
+│   ├── create-student-account.ts # 管理员脚本：单个创建
+│   └── import-students-csv.ts    # 管理员脚本：批量导入
+├── supabase/migrations/
+│   └── 001_initial_schema.sql    # 数据库建表 + RLS 策略
+├── worker/
+│   ├── email-ingest.ts           # Cloudflare 邮件解析 Worker
+│   └── wrangler.toml             # Worker 配置
+├── middleware.ts                 # Next.js 路由鉴权中间件
+└── .env.example                  # 环境变量模板
+```
+
+大学官网文件（同级目录）：
+
+```
+nexatech/
+├── index.html                    # 首页
+├── programs.html
+├── admissions.html
+├── campus.html
+├── faculty.html
+├── news.html
+├── contact.html
+├── css/style.css                 # 全局样式（含弹窗样式）
+└── js/student-login.js           # 登录弹窗脚本
+```
+
 ## 核心功能
 
 ### 学生端功能
@@ -60,11 +108,44 @@ Nexatech 邮箱平台是一个面向学校场景的邮箱系统，包含：
 
 ## 技术栈
 
-- **前端 / 应用**：Next.js 15、React 19、Tailwind CSS 4
-- **认证 + 数据库**：Supabase
-- **入站邮件**：Cloudflare Email Routing + Cloudflare Worker
-- **测试**：Vitest、Playwright、k6
-- **部署**：Vercel 承载 Web 应用，Cloudflare 负责邮件 / DNS / Worker
+面向学校的 **$0 成本无服务器邮箱方案**。
+
+| 组件 | 服务 | 免费额度 |
+|------|------|---------|
+| **前端展示** | Next.js 15 + Tailwind CSS 4 + shadcn/ui | — |
+| **部署平台** | Vercel / Cloudflare Pages | 100GB 带宽/月 |
+| **数据库 + 鉴权** | Supabase | 500MB 存储 + 5 万活跃用户 |
+| **邮件接收** | Cloudflare Email Routing + Email Worker | 10 万次请求/天 |
+| **DNS 解析** | Cloudflare DNS | 无限 |
+
+> 以上所有服务的免费额度完全满足一所学校的日常使用。
+
+## 架构概览
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                   大学官网 (静态页面)                      │
+│  点击右上角 "Student Login" ─→ 弹出登录弹窗                │
+│                        │                                 │
+│                        ▼                                 │
+│        跳转至 www.nexatech.edu.kg/mail/login             │
+└────────────────────────┬─────────────────────────────────┘
+                         │
+                    ┌────▼────┐
+                    │ Next.js │ ← 认证 (Supabase Auth)
+                    │  前端   │ ← 收件箱 / 邮件详情 / 改密码
+                    └────┬────┘
+                         │
+                    ┌────▼─────┐
+                    │ Supabase │ ← mailbox_accounts 表
+                    │ Database │ ← mail_messages 表 (RLS 隔离)
+                    └──────────┘
+
+                    外部邮件 ─→ Cloudflare MX 记录
+                              → Email Routing
+                              → Email Worker (解析 MIME)
+                              → 写入 Supabase 数据库
+```
 
 ## 本地开发
 
@@ -286,6 +367,15 @@ wrangler secret put SUPABASE_SERVICE_KEY --env production
 - `7 * * * *` —— 重放瞬时失败的投递
 - `17 3 * * *` —— 清理超出保留期的数据
 
+### 投递行为
+
+- Worker 会拒绝对域名不匹配、收件人不存在或邮箱已停用的邮件。
+- 瞬时的账号查询和存储失败会持久化到 `mail_ingestion_failures` 表中等待定时重放。
+- 重放投递时，同一收件人和已解析邮件标识会被归类为 `duplicate`，不会重复插入。
+- 没有 `Message-ID` 的邮件在存储前会生成确定性合成标识，确保重放时仍能去重。
+- 纯 HTML 邮件会以纯文本降级存储，保持收件箱为纯文本展示。
+- 每日保留期清理会删除超过 30 天的 `mail_messages`、`mail_ingestion_events`、`mail_ingestion_failures` 和 `mail_job_runs` 记录。
+
 ---
 
 ## 第五步：创建邮箱账号
@@ -361,13 +451,81 @@ SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... MAIL_DOMAIN=nexatech.edu.kg \
 - 学生与管理员登录接口都带有 origin 校验和限流。
 - 系统不包含发信功能。
 
+## 运维与可观测性
+
+使用 Supabase SQL Editor 或 psql 查看最近的投递状态。
+
+最近的入站事件：
+
+```sql
+select recipient_address, resolved_message_id, stage, status, error_category, error_message, created_at
+from mail_ingestion_events
+order by created_at desc
+limit 50;
+```
+
+待处理或最近的重放失败：
+
+```sql
+select recipient_address, resolved_message_id, stage, status, retry_count, next_retry_at, last_error, created_at
+from mail_ingestion_failures
+order by created_at desc
+limit 50;
+```
+
+最近的重放 / 清理任务运行记录：
+
+```sql
+select job_name, status, metadata_json, error_message, started_at, finished_at
+from mail_job_runs
+order by started_at desc
+limit 20;
+```
+
+## 学生功能清单 (v1)
+
+| 功能 | 状态 |
+|------|------|
+| 使用管理员分配的账号密码登录 | ✅ |
+| 查看收件箱列表 | ✅ |
+| 阅读邮件正文 | ✅ |
+| 自动标记已读 | ✅ |
+| 修改密码 | ✅ |
+| 登出 | ✅ |
+| ~~发送邮件~~ | ❌ 不支持 |
+| ~~注册账号~~ | ❌ 禁止 |
+| ~~修改邮箱地址~~ | ❌ 禁止 |
+| ~~邀请用户~~ | ❌ 禁止 |
+| ~~管理员面板~~ | ❌ 禁止 |
+
+## 常见问题
+
+### Q: 免费额度够多少学生用？
+
+| 限制 | 额度 | 换算 |
+|------|------|------|
+| Supabase 存储 | 500MB | 约 50 万封纯文本邮件 |
+| Supabase 活跃用户 | 5 万 | 同时在线 5 万学生 |
+| Cloudflare Worker | 10 万次/天 | 每天收 10 万封邮件 |
+| Vercel 带宽 | 100GB/月 | 约百万次页面访问 |
+
+对于大多数学校，这些额度绰绰有余。
+
+### Q: 学生忘记密码怎么办？
+
+管理员可通过 Supabase 后台重置密码，或使用脚本重新创建账号。v1 不支持学生自助找回密码。
+
+### Q: 能不能加发信功能？
+
+可以，但需要额外配置 SMTP 发信服务（如 Resend、SendGrid 等免费版），不属于 $0 Stack 范围。
+
+### Q: 附件支持呢？
+
+v1 暂不支持附件。如需附件，可以后续添加 Supabase Storage 桶来存储文件，并在 `mail_attachments` 表中记录元数据。
+
 ## 其他项目文档
 
-更多细节请参考：
-
-- [`mail-app/README.md`](./mail-app/README.md)
-- [`mail-app/README.zh-CN.md`](./mail-app/README.zh-CN.md)
-- [`CLAUDE.md`](./CLAUDE.md)
+对于 agent 开发指南和开发规范，请参考 [`CLAUDE.md`](./CLAUDE.md)。
 
 ## License
 

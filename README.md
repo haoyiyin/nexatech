@@ -33,6 +33,38 @@ This repository has two main parts:
    - Supabase-backed authentication and mailbox storage
    - Cloudflare Email Worker and operational scripts
 
+### Project structure
+
+```
+mail-app/
+├── app/                          # Next.js App Router pages
+│   ├── layout.tsx
+│   ├── login/page.tsx            # Student login page
+│   ├── inbox/page.tsx            # Inbox list (protected)
+│   ├── inbox/[messageId]/page.tsx # Message detail (protected)
+│   └── settings/password/page.tsx # Password change (protected)
+├── components/
+│   ├── ui/                       # shadcn/ui primitives
+│   ├── mail-layout.tsx           # Sidebar layout for authenticated pages
+│   ├── inbox-list.tsx            # Inbox message list
+│   └── message-view.tsx          # Message detail view
+├── lib/
+│   ├── supabase/client.ts        # Browser Supabase client
+│   ├── supabase/server.ts        # Server Supabase client
+│   ├── auth/require-session.ts   # Auth guard helper
+│   ├── mail/sanitize-message.ts  # Email HTML sanitizer
+│   └── utils.ts                  # cn() utility
+├── scripts/
+│   ├── create-student-account.ts # Admin: create single student
+│   └── import-students-csv.ts    # Admin: bulk import from CSV
+├── supabase/migrations/          # DB schema + reliability migrations
+├── worker/
+│   ├── email-ingest.ts           # Cloudflare Email Worker + scheduled replay/cleanup
+│   └── wrangler.toml             # Worker configuration + cron triggers
+├── middleware.ts                 # Next.js auth middleware
+└── .env.example                  # Environment variable template
+```
+
 ## Core features
 
 ### Student features
@@ -286,6 +318,15 @@ The cron triggers are already defined:
 - `7 * * * *` — replay transient ingestion failures
 - `17 3 * * *` — clean up retained data older than 30 days
 
+### Delivery behavior
+
+- The worker rejects mail for non-matching domains, unknown recipients, and suspended mailboxes.
+- Transient account lookup and storage failures are persisted in `mail_ingestion_failures` for scheduled replay.
+- Replayed deliveries with the same recipient and resolved message identifier are classified as `duplicate` instead of inserting a second message.
+- Messages without a `Message-ID` receive a deterministic synthetic identifier before storage so replayed deliveries still deduplicate.
+- HTML-only messages are stored as plain text fallback so the inbox stays text-only.
+- Daily retention cleanup removes `mail_messages`, `mail_ingestion_events`, `mail_ingestion_failures`, and `mail_job_runs` entries older than 30 days.
+
 ---
 
 ## Step 5: Create mailbox accounts
@@ -361,13 +402,40 @@ SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... MAIL_DOMAIN=nexatech.edu.kg \
 - Student and admin login endpoints include origin checks and rate limiting.
 - No outbound mail feature is included.
 
+## Operations and observability
+
+Use the Supabase SQL editor or psql to inspect recent delivery state.
+
+Recent ingestion events:
+
+```sql
+select recipient_address, resolved_message_id, stage, status, error_category, error_message, created_at
+from mail_ingestion_events
+order by created_at desc
+limit 50;
+```
+
+Pending or recent replay failures:
+
+```sql
+select recipient_address, resolved_message_id, stage, status, retry_count, next_retry_at, last_error, created_at
+from mail_ingestion_failures
+order by created_at desc
+limit 50;
+```
+
+Recent replay / cleanup job runs:
+
+```sql
+select job_name, status, metadata_json, error_message, started_at, finished_at
+from mail_job_runs
+order by started_at desc
+limit 20;
+```
+
 ## Additional project docs
 
-There is more detail in:
-
-- [`mail-app/README.md`](./mail-app/README.md)
-- [`mail-app/README.zh-CN.md`](./mail-app/README.zh-CN.md)
-- [`CLAUDE.md`](./CLAUDE.md)
+For agent guidance and development conventions, see [`CLAUDE.md`](./CLAUDE.md).
 
 ## License
 
